@@ -1,6 +1,6 @@
 export type Whale = {
   id: string;
-  name: string;
-  motherId: string;
-  fatherId: string;
+  name: string | null;
+  motherId: string | null;
+  fatherId: string | null;
 };
