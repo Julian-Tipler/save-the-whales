@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import { WhaleNode } from "./WhaleNode";
-import { Whale } from "../../Types/Types"
+import { Whale } from "../../Types/Types";
 
+export function Pedigree({ whales }: { whales: Whale[] | null }) {
 
-export function Pedigree({ whales }: { whales: Whale[] }) {
-  const [selectedWhale, setSelectedWhale] = useState<Whale | null>(null);
-
-  function handleClick(whale: Whale) {
-    setSelectedWhale(whale);
-  }
-
-  function getChildren(whale: Whale): Whale[] {
-    return whales.filter(
-      (a) => a.fatherId === whale.id || a.motherId === whale.id
-    );
+  if (!whales) {
+    return <div>Please upload whale data</div>;
   }
 
   return (
@@ -21,9 +13,9 @@ export function Pedigree({ whales }: { whales: Whale[] }) {
       {whales.map((whale) => (
         <div key={whale.id}>
           <WhaleNode whale={whale} />
-          {getChildren(whale).length > 0 && (
+          {getChildren({ whale, whales }).length > 0 && (
             <div>
-              {getChildren(whale).map((child) => (
+              {getChildren({ whale, whales }).map((child) => (
                 <Pedigree key={child.id} whales={[child]} />
               ))}
             </div>
@@ -31,5 +23,19 @@ export function Pedigree({ whales }: { whales: Whale[] }) {
         </div>
       ))}
     </div>
+  );
+}
+
+export function getChildren({
+  whale,
+  whales,
+}: {
+  whale: Whale;
+  whales: Whale[];
+}) {
+  //filters all whales to see if any whales have the current whale as father or mother
+  //returns whale children
+  return whales.filter(
+    (w) => w.fatherId === whale.id || w.motherId === whale.id
   );
 }
