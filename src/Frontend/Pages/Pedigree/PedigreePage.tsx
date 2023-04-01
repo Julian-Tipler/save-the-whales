@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Pedigree } from "./Pedigree";
-import {OneParentPedigree } from "./OneParentPedigree"
 import { mockWhales } from "./mockData";
 import { Whale } from "../../Types/Types";
-import { AddWhalesUploader } from "../../Utility/AddWhalesUploader";
+import { D3PedigreeTable } from "./D3PedigreeTable";
+import { AddFamilyMemberModal } from "../../Utility/AddFamilyMemberModal";
 
 export function PedigreePage() {
   const [whales, setWhales] = useState<Whale[] | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   //This will actually use the whales uploader
   useEffect(() => {
@@ -16,17 +16,12 @@ export function PedigreePage() {
   return (
     //pedigree container
     <div>
-      {/* {whales ? (
-        <Pedigree whales={whales} />
-      ) : (
-        <div>Zero State (please upload whales)</div>
-      )} */}
       {whales ? (
-        <OneParentPedigree whale={whales[0]} />
+        <D3PedigreeTable />
       ) : (
         <div>Zero State (please upload whales)</div>
       )}
-      <AddWhalesUploader />
+      <AddFamilyMemberModal isOpen={isOpen}/>
     </div>
   );
 }
