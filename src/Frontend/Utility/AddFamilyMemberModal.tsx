@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -15,26 +15,28 @@ import {
 
 export function AddFamilyMemberModal({
   isOpen,
-  onClose,
-  onSubmit,
+  handleClose,
+  handleSubmit,
 }: {
   isOpen: boolean;
-  onClose: () => void;
-  onSubmit: Function;
+  handleClose: () => void;
+  handleSubmit: Function;
 }) {
+  const [name, setName] = useState("");
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add Family Member</ModalHeader>
         <ModalBody>
           <FormControl>
             <FormLabel>Family Member</FormLabel>
-            <Input />
+            <Input value={name} onChange={e => setName(e.target.value)}/>
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={() => null}></Button>
+          <Button colorScheme="blue" onClick={() => null}>Create</Button>
         </ModalFooter>
         <ModalCloseButton />
       </ModalContent>

@@ -6,7 +6,11 @@ import { AddFamilyMemberModal } from "../../Utility/AddFamilyMemberModal";
 
 export function PedigreePage() {
   const [whales, setWhales] = useState<Whale[] | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   //This will actually use the whales uploader
   useEffect(() => {
@@ -21,7 +25,15 @@ export function PedigreePage() {
       ) : (
         <div>Zero State (please upload whales)</div>
       )}
-      <AddFamilyMemberModal isOpen={isOpen}/>
+      <AddFamilyMemberModal
+        isOpen={isOpen}
+        handleSubmit={handleSubmit}
+        handleClose={handleClose}
+      />
     </div>
   );
 }
+
+const handleSubmit = () => {
+  return null;
+};
