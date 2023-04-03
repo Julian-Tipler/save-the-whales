@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pedigree } from "./Pedigree";
-import {OneParentPedigree } from "./OneParentPedigree"
+import { D3TreePedigree } from "./D3TreePedigree";
 import { mockWhales } from "./mockData";
 import { Whale } from "../../Types/Types";
 import { AddWhalesUploader } from "../../Utility/AddWhalesUploader";
@@ -22,7 +21,7 @@ export function PedigreePage() {
         <div>Zero State (please upload whales)</div>
       )} */}
       {whales ? (
-        <OneParentPedigree whale={whales[0]} />
+        <D3TreePedigree />
       ) : (
         <div>Zero State (please upload whales)</div>
       )}
