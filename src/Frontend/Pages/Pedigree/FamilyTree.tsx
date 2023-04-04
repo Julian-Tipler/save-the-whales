@@ -1,6 +1,7 @@
 import "./loader";
 import * as dTree from "d3-dtree";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import "./FamilyTree.css"
 
 const FamilyTree = () => {
   useEffect(() => {
@@ -26,13 +27,13 @@ const FamilyTree = () => {
               ],
             },
           ],
-          extra: {}, // Custom data passed to renderers
+          extra: {},
         },
       ],
       {
-        width: 600,
-        height: 200,
         target: "#graph",
+        width: 600,
+        height: 800,
       }
     );
   }, []);
